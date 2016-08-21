@@ -78,7 +78,6 @@
 							<td>{{ $product->price * $product->stock }}</td>
 							<td>
 								<button class="btn btn-warning open-modal" data-toggle="modal" data-target="#modal" value="{{$product->id}}">Edit</button>
-								<!-- <a type="button" href="{{ route('deleteProduct', $product->id)}}" class="btn btn-danger delete-product" value="{{$product->id}}">Delete</a>-->
 								<button class="btn btn-danger delete-product" value="{{$product->id}}">Delete</button> 
 								<form action="{{ url('product/delete/:USER_ID') }}" method="DELETE" id="form-delete"></form>
 									<input name="_method" type="hidden" value="DELETE" id="_method">
