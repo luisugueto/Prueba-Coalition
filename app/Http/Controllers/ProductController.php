@@ -16,7 +16,11 @@ class ProductController extends Controller
      */
     public function index()
     {
- 		return view('index');
+ 		$products = Product::orderBy('submitted', 'DESC')->get();
+		
+	    return view('index', [
+	    	'products' => $products
+	    ]);       
     }
 
     /**
@@ -36,7 +40,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-       
+       $dt = new \DateTime();
+
+    $product = new Product();
+    $product->name = $request->name;
+    $product->stock = $request->stock;
+    $product->price = $request->price;
+    $product->submitted = $dt->format('Y-m-d H:i:s');
+
+    $product->save();
+
+    return response()->json($product);
         
     }
 
@@ -49,7 +63,11 @@ class ProductController extends Controller
      */
     public function show(Request $request, $id)
     {
-      	
+      	$dt = new \DateTime();
+
+		$product = new Product();
+
+		return response()->json($product);
     }
 
     /**
@@ -61,7 +79,7 @@ class ProductController extends Controller
      */
     public function edit(Request $request)
     {
-       
+        
     }
 
     /**
@@ -85,6 +103,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-	       
+	    $product = Product::destroy($product_id);
+     	return Redirect('/');   
     }
 }

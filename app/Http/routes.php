@@ -12,4 +12,3 @@ Route::resource('producto', 'ProductController');
 /**
  *  Get a specific product
  */
-
