@@ -13,14 +13,6 @@
 			<div class="col-md-12 text-center">
 				<h1>Coalition Test Product Manager</h1>
 			</div>
-			<div>
-				@if (Session::has('message'))
-					{{ Session::get('message')}}
-				@endif
-
-
-			</div>
-
 			<!-- 
 			rows ordered by date
 			 
@@ -32,9 +24,8 @@
 			For extra credit, include functionality to edit each line. -->
 		</div>
 		<div class="row">
-			<hr>
 			<div class="col-md-6 col-md-offset-3">
-				<form action="{{ url('product') }}" method="POST">
+				<form action="{{ route('producto.store') }}" method="POST">
 				{{ csrf_field() }}
 				  <div class="form-group">
 				    <label>Name</label>
@@ -78,6 +69,7 @@
 							<td>{{ $product->price * $product->stock }}</td>
 							<td>
 								<button class="btn btn-warning open-modal" data-toggle="modal" data-target="#modal" value="{{$product->id}}">Edit</button>
+								<!-- <a type="button" href="{{ route('deleteProduct', $product->id)}}" class="btn btn-danger delete-product" value="{{$product->id}}">Delete</a>-->
 								<button class="btn btn-danger delete-product" value="{{$product->id}}">Delete</button> 
 								<form action="{{ url('product/delete/:USER_ID') }}" method="DELETE" id="form-delete"></form>
 									<input name="_method" type="hidden" value="DELETE" id="_method">

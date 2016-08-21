@@ -79,6 +79,26 @@ class ProductController extends Controller
      */
     public function edit(Request $request)
     {
+        if($request->ajax())
+        {            
+            $dt = new \DateTime();
+
+            $product = Product::find($request->genre['id']);
+
+            $product->name = $request->genre['name'];
+            $product->stock = $request->genre['stock'];
+            $product->price = $request->genre['price'];
+            $product->submitted = $dt->format('Y-m-d H:i:s');
+            $product->save();
+            return response()->json([
+                'mensaje' => 'Editado', 
+                'id' => $request->genre['id'],
+                'name' => $request->genre['name'],
+                'stock' => $request->genre['stock'],
+                'price' => $request->genre['price'],
+                'submitted' => $dt->format('Y-m-d H:i:s')
+                ]);
+        }
         
     }
 

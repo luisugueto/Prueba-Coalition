@@ -34,5 +34,35 @@ $(document).ready(function () {
 	    }); 
 	});
 
-	
+	$(".btn-save").click(function (e) {
+		e.preventDefault(); 
+		var route = "http://localhost:8000/product/edit/";
+		var token = $("#_token").val();
+
+		var formData = {
+	            name : $('#modal-name').val(),
+	            stock : $('#modal-stock').val(),
+	            price : $('#modal-price').val(),
+	            id : $('#product_id').val()
+	        }
+
+		$.ajax({
+			url: route,
+			headers: {'X-CSRF-TOKEN': token},
+			type: 'PUT',
+			dataType: 'json',
+			data: {genre: formData},
+			success: function (data) {
+					var total = parseInt(data.price)*parseInt(data.stock);
+	                var product = '<tr id="product'+ data.id +'"><td>'+ data.name +'</td><td>'+ data.stock +'</td><td>'+ data.price +'</td><td>'+ data.submitted +'</td><td>'+ total +'</td><td><button class="btn btn-warning open-modal" data-toggle="modal" data-target="#modal" value="'+data.id+'">Edit</button><button class="btn btn-danger delete-product" value="'+data.id+'">Delete</button></td></tr>';
+
+	                $("#product" + data.id).replaceWith(product);
+	                $("#btn-cancel").click();
+	                $('#modal').trigger("reset");
+	        },
+	        error: function (data) {
+	            console.log('Error:', data);
+	        }
+		});  
+	});
 });
