@@ -99,7 +99,38 @@
 		</div>
 	</div>
 
-	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Edit Product</h4>
+	      </div>
+		      <div class="modal-body">
+		      	  <div class="form-group">
+		            <label>Name</label>
+		            <input type="text" id="modal-name" name="name" class="form-control" placeholder="Product name">
+		          </div>
+
+		          <div class="form-group">
+		            <label>Stock</label>
+		            <input type="number" id="modal-stock" name="stock" class="form-control" placeholder="Stock">
+		          </div>
+		          <div class="form-group">
+		            <label>Price</label>
+		            <input type="number" id="modal-price" name="price" class="form-control" placeholder="Price">
+		          </div>
+		          <input type="hidden" id="product_id" name="id">
+		      </div>
+		      <div class="modal-footer">
+		      	{{ csrf_field() }}
+		        <button type="button" id="btn-cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		        <button class="btn btn-primary btn-save" data-toggle="modal">Save changes</button>
+		      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
 </body>
 <script src="js/jquery.min.js"></script>
 <script src="bootstrap/dist/js/bootstrap.min.js"></script>
