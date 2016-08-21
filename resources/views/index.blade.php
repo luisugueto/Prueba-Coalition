@@ -13,6 +13,13 @@
 			<div class="col-md-12 text-center">
 				<h1>Coalition Test Product Manager</h1>
 			</div>
+			<div>
+				@if (Session::has('message'))
+					{{ Session::get('message')}}
+				@endif
+
+
+			</div>
 
 			<!-- 
 			rows ordered by date
@@ -27,7 +34,7 @@
 		<div class="row">
 			<hr>
 			<div class="col-md-6 col-md-offset-3">
-				<form action="{{ route('producto.store') }}" method="POST">
+				<form action="{{ url('product') }}" method="POST">
 				{{ csrf_field() }}
 				  <div class="form-group">
 				    <label>Name</label>
@@ -59,8 +66,40 @@
 							<th>Action</th>
 						</tr>
 					</thead>
-					
+					<tbody id="products_list">
+					@if (count($products) > 0)
+						
+						@foreach ($products as $product)
+						<tr data-id="{{ $product->id }}" id="product{{ $product->id }}">
+							<td>{{ $product->name }}</td>
+							<td>{{ $product->stock }}</td>
+							<td>{{ $product->price }}</td>
+							<td>{{ $product->submitted }}</td>
+							<td>{{ $product->price * $product->stock }}</td>
+							<td>
+								<button class="btn btn-warning open-modal" data-toggle="modal" data-target="#modal" value="{{$product->id}}">Edit</button>
+								<!-- <a type="button" href="{{ route('deleteProduct', $product->id)}}" class="btn btn-danger delete-product" value="{{$product->id}}">Delete</a>-->
+								<button class="btn btn-danger delete-product" value="{{$product->id}}">Delete</button> 
+								<form action="{{ url('product/delete/:USER_ID') }}" method="DELETE" id="form-delete"></form>
+									<input name="_method" type="hidden" value="DELETE" id="_method">
+									<input name="_token" type="hidden" value="{{ csrf_token() }}" id="_token">
+								</form>
+							</td>
+						</tr>
+						@endforeach
 
+					@else
+					<tr>
+						<td>No products loaded</td>
+					</tr>
+					@endif
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	
 </body>
 <script src="js/jquery.min.js"></script>
 <script src="bootstrap/dist/js/bootstrap.min.js"></script>
