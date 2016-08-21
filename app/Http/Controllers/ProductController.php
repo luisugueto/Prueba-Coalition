@@ -42,15 +42,15 @@ class ProductController extends Controller
     {
        $dt = new \DateTime();
 
-    $product = new Product();
-    $product->name = $request->name;
-    $product->stock = $request->stock;
-    $product->price = $request->price;
-    $product->submitted = $dt->format('Y-m-d H:i:s');
+        $product = new Product();
+        $product->name = $request->name;
+        $product->stock = $request->stock;
+        $product->price = $request->price;
+        $product->submitted = $dt->format('Y-m-d H:i:s');
 
-    $product->save();
+        $product->save();
 
-    return response()->json($product);
+        return response()->json($product);
         
     }
 
